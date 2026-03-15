@@ -5,6 +5,10 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import entity.Product;
 import util.HibernateUtil;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
 
 
 public class ProductDAO {
@@ -17,6 +21,63 @@ public class ProductDAO {
         session.save(product);
 
         tx.commit();
+        session.close();
+    }
+    public void getProductsSortedByPrice() {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Product> cq = cb.createQuery(Product.class);
+
+        Root<Product> root = cq.from(Product.class);
+
+        cq.select(root).orderBy(cb.asc(root.get("price")));
+
+        List<Product> products = session.createQuery(cq).getResultList();
+
+        for(Product p : products) {
+            System.out.println(p.getName() + " " + p.getPrice());
+        }
+
+        session.close();
+    }
+    public void getProductsAbovePrice(int price) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Product> cq = cb.createQuery(Product.class);
+
+        Root<Product> root = cq.from(Product.class);
+
+        cq.select(root).where(cb.gt(root.get("price"), price));
+
+        List<Product> products = session.createQuery(cq).getResultList();
+
+        for(Product p : products) {
+            System.out.println(p.getName() + " " + p.getPrice());
+        }
+
+        session.close();
+    }
+    public void getAllProductsCriteria() {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Product> cq = cb.createQuery(Product.class);
+
+        Root<Product> root = cq.from(Product.class);
+
+        cq.select(root);
+
+        List<Product> products = session.createQuery(cq).getResultList();
+
+        for(Product p : products) {
+            System.out.println(p.getName() + " " + p.getPrice());
+        }
+
         session.close();
     }
     public void updateProduct(int id, int newPrice) {

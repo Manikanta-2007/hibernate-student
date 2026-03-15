@@ -7,6 +7,13 @@ public class MainApp {
     public static void main(String[] args) {
 
     	ProductDAO dao = new ProductDAO();
+    	dao.getAllProductsCriteria();
+
+    	System.out.println("Sorted by price:");
+    	dao.getProductsSortedByPrice();
+
+    	System.out.println("Products above 10000:");
+    	dao.getProductsAbovePrice(10000);
 
     	// Insert multiple products
     	dao.saveProduct(new Product("Laptop","Electronics",80000,5));
