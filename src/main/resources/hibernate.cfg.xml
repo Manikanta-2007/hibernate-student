@@ -7,7 +7,7 @@
 
         <!-- Database connection -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/inventory_db</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate_lab</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">Mani@0203</property>
 
@@ -20,6 +20,8 @@
         <mapping class="entity.Product"/>
         <mapping class="entity.Department"/>
 		<mapping class="entity.Employee"/>
+		<mapping class="entity.Student"/>
+		<mapping class="entity.Course"/>
 
     </session-factory>
 </hibernate-configuration>
