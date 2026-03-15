@@ -2,11 +2,14 @@ package util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import entity.Bike;
+import entity.Car;
 import entity.Course;
 import entity.Department;
 import entity.Employee;
 import entity.Product;
 import entity.Student;
+import entity.Vehicle;
 
 public class HibernateUtil {
 
@@ -21,6 +24,9 @@ public class HibernateUtil {
                     .addAnnotatedClass(Employee.class)
                     .addAnnotatedClass(Student.class)
                     .addAnnotatedClass(Course.class)
+                    .addAnnotatedClass(Vehicle.class)
+                    .addAnnotatedClass(Car.class)
+                    .addAnnotatedClass(Bike.class)
                     .buildSessionFactory();
         } catch (Throwable ex) {
             throw new ExceptionInInitializerError(ex);
