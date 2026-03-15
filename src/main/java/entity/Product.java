@@ -42,6 +42,9 @@ public class Product {
 
     public int getQuantity() {
         return quantity;
-    } 
+    }
+    public void setPrice(int price) {
+    	this.price=price;
+    }
 
 }
