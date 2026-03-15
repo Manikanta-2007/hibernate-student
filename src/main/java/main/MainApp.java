@@ -1,6 +1,12 @@
 package main;
 import dao.ProductDAO;
 import entity.Product;
+import entity.Employee;
+import entity.Department;
+import util.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import java.util.Arrays;
 
 public class MainApp {
 
@@ -36,6 +42,21 @@ public class MainApp {
     	dao.countProducts();
     	dao.minMaxPrice();
     	dao.filterPriceRange();
+    	
+    	Employee e1 = new Employee("Rahul", "Developer");
+    	Employee e2 = new Employee("Kiran", "Tester");
+
+    	Department dept = new Department("IT", Arrays.asList(e1, e2));
+
+    	Session session = HibernateUtil.getSessionFactory().openSession();
+    	Transaction tx = session.beginTransaction();
+
+    	session.save(dept);
+
+    	tx.commit();
+    	session.close();
+
+    	System.out.println("Department and Employees saved successfully");
 
     }
 
